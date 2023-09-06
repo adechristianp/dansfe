@@ -2,13 +2,14 @@
 import { useRouter } from 'next/navigation';
 import React from 'react'
 import axios from 'axios';
+import { urlApi } from '@/data/variables';
 
 const NavBar = () => {
     const router = useRouter();
     const handleLogout = async () => {
         console.log("handleLogout")
         try {
-            await axios.delete('http://127.0.0.1:7072/logout', {
+            await axios.delete(`${urlApi}logout`, {
                 withCredentials: true,
             });
             router.push('/login');

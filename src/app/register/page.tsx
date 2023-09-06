@@ -4,6 +4,7 @@ import { TextField } from "@/components/field";
 import { useRouter } from 'next/navigation';
 import { useState } from "react";
 import axios from "axios";
+import { urlApi } from "@/data/variables";
 
 export default function Register() {
     const router = useRouter();
@@ -19,7 +20,7 @@ export default function Register() {
             setErr("")
         }
         try {
-            await axios.post('http://127.0.0.1:7072/register', {
+            await axios.post(`${urlApi}register`, {
                 name: name,
                 email: email,
                 password: password

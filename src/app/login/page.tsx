@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/button";
 import { TextField } from "@/components/field";
+import { urlApi } from "@/data/variables";
 import axios from "axios";
 import { useRouter } from 'next/navigation';
 import { useState } from "react";
@@ -18,7 +19,7 @@ export default function Login() {
             setErr("")
         }
         try {
-            await axios.post('http://127.0.0.1:7072/login', {
+            await axios.post(`${urlApi}login`, {
                 email: email,
                 password: password
             }, {

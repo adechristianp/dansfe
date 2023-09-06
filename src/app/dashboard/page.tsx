@@ -8,6 +8,7 @@ import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { urlApi } from "@/data/variables";
 
 export default function Login() {
     const router = useRouter();
@@ -31,7 +32,7 @@ export default function Login() {
         const currentDate = new Date();
         if(expire * 1000 < currentDate.getTime() || !config.headers.Authorization){
             try {
-                const response = await axios.get('http://127.0.0.1:7072/token', {
+                const response = await axios.get(`${urlApi}token`, {
                     withCredentials: true,
                 });
                 config.headers.Authorization = `Bearer ${response.data.data.token}`;
@@ -49,7 +50,7 @@ export default function Login() {
 
     const getPositions = useCallback(async (newToken?: any, page?: number) => {
         setLoading(true);
-        const response = await axiosService.get('http://127.0.0.1:7072/positions', {
+        const response = await axiosService.get(`${urlApi}positions`, {
             params: {
                 page: page || 1,
                 description: jobDesc,
@@ -68,7 +69,7 @@ export default function Login() {
 
     const checkToken = useCallback(async () => {
         try {
-            const response = await axios.get('http://127.0.0.1:7072/token', {
+            const response = await axios.get(`${urlApi}token`, {
                 withCredentials: true,
             });
             const decode: any = jwt_decode(response.data.data.token)
